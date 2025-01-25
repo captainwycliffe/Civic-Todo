@@ -39,18 +39,6 @@ Install the necessary dependencies using `npm`.
 npm install
 ```
 
-### 3. Configure Environment Variables:
-Create a `.env` file in the root directory to store any required environment variables, such as the database file path.
-
-Example `.env` file:
-
-```plaintext
-DB_PATH=./todos.db
-PORT=5000
-```
-
-The `DB_PATH` specifies the location of your SQLite database (the default is `todos.db`).
-
 ### 4. Start the Server:
 You can start the server by running the following command:
 
