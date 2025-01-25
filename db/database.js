@@ -1,7 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-// Initialize SQLite database
 const dbPath = path.resolve(__dirname, 'todos.db');
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
@@ -11,10 +10,9 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-console.log("DB Path: ", dbPath); // Log the actual database path
+console.log("DB Path: ", dbPath); 
 
 
-// Initialize database schema (create table if not exists)
 const initializeDB = () => {
   const query = `
     CREATE TABLE IF NOT EXISTS todos (
@@ -30,5 +28,4 @@ const initializeDB = () => {
   });
 };
 
-// Export the db object and initialization function
 module.exports = { db, initializeDB };

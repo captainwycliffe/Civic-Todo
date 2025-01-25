@@ -5,33 +5,25 @@ const dotenv = require("dotenv");
 const { db, initializeDB } = require("./db/database");
 const todoRoutes = require("./routes/todoRoutes");
 
-// Load environment variables
 dotenv.config();
 
-// Initialize the app
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Initialize database
 initializeDB();
 
-// Use routes
 app.use("/api/todos", todoRoutes);
 
-// Start the server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-// Welcome route
 app.get("/", (req, res) => {
   res.send("Welcome to the To-Do List API");
 });
 
-// Get all todos (optional if you are using `todoRoutes` for this)
 app.get("/todos", (req, res) => {
   db.all("SELECT * FROM todos", (err, rows) => {
     if (err) {
@@ -42,7 +34,6 @@ app.get("/todos", (req, res) => {
   });
 });
 
-// Get a single todo by ID (optional if you are using `todoRoutes` for this)
 app.get("/todos/:id", (req, res) => {
   const { id } = req.params;
   db.get("SELECT * FROM todos WHERE id = ?", [id], (err, row) => {
@@ -56,7 +47,6 @@ app.get("/todos/:id", (req, res) => {
   });
 });
 
-// Create a new todo (optional if you are using `todoRoutes` for this)
 app.post("/todos", (req, res) => {
   const { title, completed } = req.body;
   const query = "INSERT INTO todos (title, completed) VALUES (?, ?)";
@@ -69,7 +59,6 @@ app.post("/todos", (req, res) => {
   });
 });
 
-// Update an existing todo (optional if you are using `todoRoutes` for this)
 app.put("/todos/:id", (req, res) => {
   const { id } = req.params;
   const { title, completed } = req.body;
@@ -85,7 +74,6 @@ app.put("/todos/:id", (req, res) => {
   });
 });
 
-// Delete a todo (optional if you are using `todoRoutes` for this)
 app.delete("/todos/:id", (req, res) => {
   const { id } = req.params;
   const query = "DELETE FROM todos WHERE id = ?";

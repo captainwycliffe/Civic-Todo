@@ -49,7 +49,6 @@ router.post("/", (req, res) => {
   insertTodo(0);
 });
 
-// Update an existing todo
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   const { title, completed } = req.body;
@@ -65,7 +64,6 @@ router.put("/:id", (req, res) => {
   });
 });
 
-// Delete a todo
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   const query = "DELETE FROM todos WHERE id = ?";
